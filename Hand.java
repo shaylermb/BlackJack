@@ -1,11 +1,13 @@
 public class Hand {
 	private Card[] hand;
-	public Hand(Card[] hand){
-		this.hand = hand;
+	private int cards;
+	public Hand(){
+		this.hand = new Card[11];
 
 	}
-	public add(Card a){
-		
+	public void add(Card a){
+		this.hand[cards] = a;
+		this.cards++;
 	}
 
 }

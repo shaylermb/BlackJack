@@ -1,24 +1,26 @@
 import java.util.Random;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 public class Deck {
 
     private Card[] deck;  
     private int cardsUsed; 
-    private Random r = new Random;
-    
+    private Hand hand;
     public Deck() {
       deck = new Card[52];
       int cardCt = 0;
       for ( int suit = 0; suit <= 3; suit++ ) {
-        for ( int value = 1; value <= 13; value++ ) {
-           deck[cardCt] = new Card(value,suit);
+        for ( int value = 1; value <= 14; value++ ) {
+            deck[cardCt] = new Card(value,suit);
             cardCt++;
         }
       }
       cardsUsed = 0;
-      Hand hand = new Hand();
+      this.hand = new Hand();
     }
     
     public void shuffle() {
+      Random r = new Random();
       for (int i = 52; i>=1; i--) {
         Card a = deck[i];
         int rand = r.nextInt(i);
@@ -33,14 +35,20 @@ public class Deck {
     }
     
     public Card dealCard() {
-      if (cardsUsed == 52)
-          shuffle();
       cardsUsed++;
       return deck[cardsUsed - 1];
     }
-    public void hit(){
-      hand.add(deck[i]);
-      hand.add
+    public void hit(){ 
+      hand.add(deck[0]);
+      dealCard();
+    }
+    public void drawDeck(Graphics g, int y){
+      int x = 50;
+      for (int i = 0; i<deck.length; i++) {
+        this.deck[i].draw(g, card.getTitle, new Rectangle(x, y, 200, 300));
+      }
+      x += 25;
     }
 
-} // end class Deck
+
+} 
