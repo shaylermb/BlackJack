@@ -7,21 +7,22 @@ public class Deck {
     private int cardsUsed; 
     private Hand hand;
     public Deck() {
-      deck = new Card[52];
+      this.deck = new Card[52];
       int cardCt = 0;
+      this.hand = new Hand();
       for ( int suit = 0; suit <= 3; suit++ ) {
-        for ( int value = 1; value <= 14; value++ ) {
-            deck[cardCt] = new Card(value,suit);
+        for ( int value = 1; value <= 13; value++ ) {
+            this.deck[cardCt] = new Card(value,suit);
             cardCt++;
         }
       }
       cardsUsed = 0;
-      this.hand = new Hand();
+      
     }
     
     public void shuffle() {
       Random r = new Random();
-      for (int i = 52; i>=1; i--) {
+      for (int i = 51; i>0; i--) {
         Card a = deck[i];
         int rand = r.nextInt(i);
         deck[i] = deck[rand];
@@ -38,16 +39,18 @@ public class Deck {
       cardsUsed++;
       return deck[cardsUsed - 1];
     }
-    public void hit(){ 
-      hand.add(deck[0]);
-      dealCard();
+    public Card returnTop(){
+      this.cardsUsed++;
+      return deck[cardsUsed - 1];
     }
+   
     public void drawDeck(Graphics g, int y){
       int x = 50;
       for (int i = 0; i<deck.length; i++) {
-        this.deck[i].draw(g, card.getTitle, new Rectangle(x, y, 200, 300));
+        this.deck[i].draw(g, deck[i].getTitle(), new Rectangle(x, y, 100, 150));
+        x += 25;
       }
-      x += 25;
+      
     }
 
 

@@ -23,19 +23,22 @@ public class Card{
 		}else if (suit == 3) {
 			this.suitName = "Spades";
 		}
-		if (value >10) {
-			if(value == 11){
-				this.title = "J" + this.suitName;
-			} else if(value == 12){
-				this.title = "Q" + this.suitName;
-			} else if(value == 13){
-				this.title = "K" + this.suitName;
-			} else if(value == 14){
-				this.title = "A" + this.suitName;
-			}
+		
+		if(value == 11){
+			this.title = "J" + this.suitName;
+		} else if(value == 12){
+			this.title = "Q" + this.suitName;
+		} else if(value == 13){
+			this.title = "K" + this.suitName;
 		}
+		
 		if (value <= 10) {
-			this.title = value + suitName;
+			if(value == 1){
+				this.title = "A" + this.suitName;
+			} else {
+				this.title = value + suitName;
+			}
+			
 		}
 	}
 	private static Image loadImage(String title) {
