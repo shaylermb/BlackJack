@@ -14,6 +14,8 @@ public class Card{
 	private Picture picture;
 
 	public Card(int value, int suit){
+		this.value = value;
+		this.suit = suit;
 		if(suit == 0){
 			this.suitName = "Clubs";
 		}else if (suit == 1) {
@@ -39,6 +41,9 @@ public class Card{
 				this.title = value + suitName;
 			}
 			
+		}
+		if (this.value>10){
+			this.value = 10;
 		}
 	}
 	private static Image loadImage(String title) {

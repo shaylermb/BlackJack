@@ -9,12 +9,17 @@ public class TableApplet extends Applet {
 		this.human = new Human();
 		this.human.hit(dealer);
 		this.human.hit(dealer);
-		
+		this.dealer.hit(dealer);
+		this.dealer.hit(dealer);
+		ButtonPanel bp = new ButtonPanel(this.human, this.dealer);
+		this.add(bp);
 
 	}
 
 	public void paint(Graphics g) {
 		this.human.returnHand().drawHand(g, 150);
+		this.dealer.returnHand().drawHand(g, 350);
+		super.paint(g);
 	}
 
 }

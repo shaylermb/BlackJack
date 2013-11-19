@@ -4,6 +4,9 @@ class Dealer extends Player{
 		this.deck = new Deck();
 		this.deck.shuffle();
 	}
+	public void hit(Dealer dealer){
+		addCard(dealer.getCard());
+	}
 	public Card getCard(){
 		return deck.returnTop();
 	}

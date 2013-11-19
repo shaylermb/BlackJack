@@ -35,13 +35,9 @@ public class Deck {
       return 52 - cardsUsed;
     }
     
-    public Card dealCard() {
-      cardsUsed++;
-      return deck[cardsUsed - 1];
-    }
     public Card returnTop(){
       this.cardsUsed++;
-      return deck[cardsUsed - 1];
+      return deck[cardsLeft()];
     }
    
     public void drawDeck(Graphics g, int y){
