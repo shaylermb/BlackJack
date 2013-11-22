@@ -12,9 +12,11 @@ public class Card{
 	private String suitName;
 	private String title;
 	private Picture picture;
+	private String back;
 
 	public Card(int value, int suit){
 		this.value = value;
+		this.back = "back-blue";
 		this.suit = suit;
 		if(suit == 0){
 			this.suitName = "Clubs";
@@ -64,6 +66,16 @@ public class Card{
 	}
 	public int getValue(){
 		return this.value;
+	}
+	public int getValue2() {
+		if (this.value==1) {
+			return 11;
+		} else {
+			return this.value;
+		}
+	}
+	public void drawBack(Graphics g, Rectangle r){
+		g.drawImage(Card.loadImage(back), r.x, r.y, r.width, r.height, null);
 	}
 	public int getNumber(){
 		return this.suit;

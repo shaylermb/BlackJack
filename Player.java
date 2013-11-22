@@ -1,5 +1,5 @@
 public class Player{
-	public Hand hand;
+	private Hand hand;
 	public Player(){
 		this.hand = new Hand();
 	}
@@ -8,6 +8,7 @@ public class Player{
 	}
 	public int score(){
 		return this.hand.getValue();
+
 	}
 	public Hand returnHand(){
 		return this.hand;

@@ -13,24 +13,40 @@ public class Hand {
 		this.cards++;
 
 	}
-	public int cards(){
+	public int getCards(){
 		return this.cards;
 	}
 	public int getValue(){
-		this.sum = 0;
-		for (int i = 0; i<cards; i++) {
-			this.sum += hand[i].getValue();
+		int sum = 0;
+		for (int i = 0; i<this.cards; i++) {
+			sum += hand[i].getValue2();
 		}
-		
-		return this.sum;
+		if (sum > 21) {
+			sum = 0;
+			for (int i = 0; i<this.cards; i++) {
+				sum += hand[i].getValue();
+			}
+		}
+		return sum;
 	}
 	public void drawHand(Graphics g, int y){
 	  int x = 50;
 	  for (int i = 0; i<this.cards; i++) {
 	    this.hand[i].draw(g, hand[i].getTitle(), new Rectangle(x, y, 100, 150));
-	    x += 25;
+	    x += 125;
 	  }
 	  
 	}
-
+	public void drawDealer(Graphics g, int y){
+	  int x = 50;
+	  for (int i = 0; i<this.cards; i++) {
+	  	this.hand[i].draw(g, hand[i].getTitle(), new Rectangle(x, y, 100, 150));
+	  	if(i == 0){
+	  		this.hand[i].drawBack(g, new Rectangle(x, y, 100, 150));
+	  	}
+	    
+	    x += 125;
+	  }
+	  
+	}
 }
