@@ -14,3 +14,6 @@ called using "getters" and "setters".
 time rewriting the code again.
 7. "This" calls the private variable in a class. You must call the variable using this.X instead of just X. Super 
 calls the constructor for the parent file. It makes sure that you make the parent file before the daughter.
+8. The properties of all objects are State and behavior. State is variables, behavior is methods.
+9. Sometimes i am confused on how to bring info across between two different objects. And also what classifies a
+java file as an object.
