@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+//Hand is fairly simple. Just an array of cards that has a value and is able to draw itself.
 public class Hand {
 	private Card[] hand;
 	private int cards;

@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Graphics;
-
+//What took me the longest was this button panel. I stupidly put most of the math in here, and ran out of time
+//when i wanted to change it. If i was to go back i would shorten this and compress much of the words into
+//bigger methods.
+//
 public class ButtonPanel extends JPanel implements ActionListener{
 	private JLabel label, bet, wallet;
 	private JButton hit, stay, game, betb, dbl;
@@ -176,7 +179,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		this.dealer.hit(this.dealer);
 		betv = 0;
 		bet.setText("Your Bet: " + betv);
-		
 		this.x = 0;
 	}
 	public int getBet(){

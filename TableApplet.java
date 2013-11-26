@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.applet.*;
-
+//This was the easiest of the set, simple math. possibly could shorten and sharpen some of the math used to deal
+//the cards correctly.
 public class TableApplet extends Applet {
 	private Dealer dealer;
 	private Human human;
 	private ButtonPanel bp;
+	private JLabel wallet;
 	private Score score;
 	public void init() {
 		this.dealer = new Dealer();
