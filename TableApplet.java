@@ -13,7 +13,6 @@ public class TableApplet extends Applet {
 		this.dealer.hit(dealer);
 		this.dealer.hit(dealer);
 		this.bp = new ButtonPanel(this.human, this.dealer, this);
-
 		this.add(bp);
 
 	}
@@ -29,6 +28,10 @@ public class TableApplet extends Applet {
 		}
 		
 
+	}
+	public void newgame(Human human, Dealer dealer){
+		this.human = human;
+		this.dealer = dealer;
 	}
 
 }
