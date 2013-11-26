@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class ButtonPanel extends JPanel implements ActionListener{
 	private JLabel label, bet, wallet;
-	private JButton hit, stay, game, betb;
+	private JButton hit, stay, game, betb, dbl;
 	private int value = 0;
 	private Human human;
 	private Dealer dealer;
@@ -20,17 +20,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		this.value = human.score();
 		this.walletv = 100;
 
-		label = new JLabel(value+"");
+		label = new JLabel("");
 		label.setFont(new Font("sansserif", Font.BOLD, 16));
 		this.add(label);
-
-		bet = new JLabel(betv+"");
-		label.setFont(new Font("sansserif", Font.BOLD, 16));
-		this.add(bet);
-
-		wallet = new JLabel(walletv+"");
-		label.setFont(new Font("sansserif", Font.BOLD, 16));
-		this.add(wallet);
 
 		String title = "Hit";
 		hit = new JButton(title);
@@ -55,21 +47,37 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		betb.setActionCommand(title);
 		betb.addActionListener(this);
 		this.add(betb);
+
+		title = "Double Down";
+		dbl = new JButton(title);
+		dbl.setActionCommand(title);
+		dbl.addActionListener(this);
+		this.add(dbl);
+
+		bet = new JLabel("Your Bet: " + betv);
+		bet.setFont(new Font("sansserif", Font.BOLD, 16));
+		this.add(bet);
+
+		wallet = new JLabel("Your Wallet: " + walletv);
+		wallet.setFont(new Font("sansserif", Font.BOLD, 16));
+		this.add(wallet);
 		
 	}
 	public void actionPerformed(ActionEvent ae){
 		if("Hit".equals(ae.getActionCommand())){
 			this.human.hit(this.dealer);
-			if (this.human.score() >= 21) {
+			if (this.human.score() > 21) {
 				label.setText("Bust! Dealer Wins!");
-				this.x = 1;
-
-			} 
-			if (this.human.score() < 21){
-				label.setText(this.human.score() +"");
+				this.x = 2;
+				hit.setEnabled(false);
+				stay.setEnabled(false);
+				dbl.setEnabled(false);
 			}
+			betb.setEnabled(false);
+			this.x = 1;
 			table.repaint();
 			repaint();
+			validate();
 		} else if ("Stay".equals(ae.getActionCommand())){
 			while(this.dealer.score() < 17){
 				this.dealer.hit(this.dealer);
@@ -85,37 +93,65 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				walletv += betv;
 				label.setText("Tie!");
 			}
-			betv = 0;
-			this.x = 1;
+			wallet.setText("Your Wallet: " + walletv);
+			this.x = 2;
+			betb.setEnabled(false);
+			hit.setEnabled(false);
+			stay.setEnabled(false);
+			dbl.setEnabled(false);
 			table.repaint();
 			repaint();
 			validate();
+
 			
 		}
 		if ("New Game".equals(ae.getActionCommand())) {
 			newHand();
-			System.out.println("New Game");
-			label.setText(this.human.score() +"");
+			label.setText("");
+			betb.setEnabled(true);
+			hit.setEnabled(true);
+			stay.setEnabled(true);
+			dbl.setEnabled(true);
 			repaint();
 			table.repaint();
+			validate();
 
 			
 		}
 		if ("Bet 10$".equals(ae.getActionCommand())){
 			betv += 10;
 			walletv -= 10;
-			bet.setText(betv + "");
-			wallet.setText(walletv + "");
+			bet.setText("Your Bet: " + betv);
+			wallet.setText("Your Wallet: " + walletv);
 			table.repaint();
 			repaint();
-			System.out.println(betv);
+			validate();
+		}
+		if ("Double Down".equals(ae.getActionCommand())) {
+			this.human.hit(this.dealer);
+			betv *= 2;
+			walletv -= betv;
+			if (this.human.score() > 21) {
+				label.setText("Bust! Dealer Wins!");
+				this.x = 2;
+				hit.setEnabled(false);
+				stay.setEnabled(false);
+				dbl.setEnabled(false);
+			}
+			bet.setText("Your Bet: " + betv);
+			wallet.setText("Your Wallet: " + walletv);
+			betb.setEnabled(false);
+			this.x = 1;
+			table.repaint();
+			repaint();
+			validate();
 		}
 	}
 	public int stay(){
 		return this.x;
 	}
 	public boolean playerWins(){
-		if (this.human.score() < 21) {
+		if (this.human.score() <= 21) {
 			if (this.human.score() > dealer.score() || this.dealer.score() > 21) {
 				return true;		
 			}
@@ -123,8 +159,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		return false;
 	}
 	public boolean dealerWins(){
-		if (this.dealer.score() < 21) {
-			if (this.human.score() < this.dealer.score() || this.dealer.score() > 21) {
+		if (this.dealer.score() <= 21) {
+			if (this.human.score() < this.dealer.score() || this.human.score() > 21) {
 				return true;
 			}
 		}
@@ -139,24 +175,14 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		this.dealer.hit(this.dealer);
 		this.dealer.hit(this.dealer);
 		betv = 0;
-		bet.setText(betv + "");
-		wallet.setText(walletv + "");
+		bet.setText("Your Bet: " + betv);
+		
 		this.x = 0;
 	}
-	// if(this.human.score() > this.dealer.score()){
-	// 			label.setText("Player Wins!");
-	// 			walletv += (betv*2);
-	// 			betv = 0;
-	// 		} else if(this.human.score() == this.dealer.score()){
-	// 			label.setText("Tie!");
-	// 		} else if(this.dealer.score() > 21){
-	// 			label.setText("Dealer Bust!");
-	// 			walletv += (betv*2);
-	// 			wallet.setText(walletv + "");
-				
-	// 		} else {
-	// 			label.setText("Dealer Wins!");
-	// 			walletv -= betv;
-	// 			betv = 0;
-	// 		} 
+	public int getBet(){
+		return this.betv;
+	}
+	public int getWallet(){
+		return this.walletv;
+	}
 }
