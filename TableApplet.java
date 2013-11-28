@@ -6,8 +6,6 @@ public class TableApplet extends Applet {
 	private Dealer dealer;
 	private Human human;
 	private ButtonPanel bp;
-	private JLabel wallet;
-	private Score score;
 	public void init() {
 		this.dealer = new Dealer();
 		this.human = new Human();
