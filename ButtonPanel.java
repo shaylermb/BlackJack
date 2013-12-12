@@ -8,7 +8,7 @@ import java.awt.Graphics;
 //
 public class ButtonPanel extends JPanel implements ActionListener{
 	private JLabel label, bet, wallet;
-	private JButton hit, stay, game, betb, dbl;
+	private JButton hit, stay, game, betb, dbl, start;
 	private int value = 0;
 	private Human human;
 	private Dealer dealer;
@@ -57,6 +57,13 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		dbl.addActionListener(this);
 		this.add(dbl);
 
+		title = "Start";
+		start = new JButton(title);
+		start.setActionCommand(title);
+		start.addActionListener(this);
+		this.add(start);
+
+
 		bet = new JLabel("Your Bet: " + betv);
 		bet.setFont(new Font("sansserif", Font.BOLD, 16));
 		this.add(bet);
@@ -64,6 +71,12 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		wallet = new JLabel("Your Wallet: " + walletv);
 		wallet.setFont(new Font("sansserif", Font.BOLD, 16));
 		this.add(wallet);
+
+		betb.setEnabled(false);
+		hit.setEnabled(false);
+		stay.setEnabled(false);
+		dbl.setEnabled(false);
+		start.setEnabled(true);
 		
 	}
 	public void actionPerformed(ActionEvent ae){
@@ -106,6 +119,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			repaint();
 			validate();
 
+			
+		}
+		if("Start".equals(ae.getActionCommand())){
 			
 		}
 		if ("New Game".equals(ae.getActionCommand())) {
