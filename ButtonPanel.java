@@ -8,7 +8,7 @@ import java.awt.Graphics;
 //
 public class ButtonPanel extends JPanel implements ActionListener{
 	private JLabel label, bet, wallet;
-	private JButton hit, stay, game, betb, dbl, start;
+	private JButton hit, stay, game, betb, dbl, start, lessbet;
 	private int value = 0;
 	private Human human;
 	private Dealer dealer;
@@ -51,6 +51,12 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		betb.addActionListener(this);
 		this.add(betb);
 
+		title = "Bet -10$";
+		lessbet = new JButton(title);
+		lessbet.setActionCommand(title);
+		lessbet.addActionListener(this);
+		this.add(lessbet);
+
 		title = "Double Down";
 		dbl = new JButton(title);
 		dbl.setActionCommand(title);
@@ -77,6 +83,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		stay.setEnabled(false);
 		dbl.setEnabled(false);
 		start.setEnabled(true);
+		lessbet.setEnabled(false);
 		
 	}
 	public void actionPerformed(ActionEvent ae){
@@ -143,6 +150,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			stay.setEnabled(false);
 			dbl.setEnabled(false);
 			start.setEnabled(true);
+			lessbet.setEnabled(false);
 			repaint();
 			table.repaint();
 			validate();
@@ -154,9 +162,23 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			walletv -= 10;
 			bet.setText("Your Bet: " + betv);
 			wallet.setText("Your Wallet: " + walletv);
-			table.repaint();
+			lessbet.setEnabled(true);
 			repaint();
 			validate();
+		}
+		if ("Bet -10$".equals(ae.getActionCommand())) {
+			if (betv > 0) {
+				betv -= 10;
+				walletv += 10;
+				bet.setText("Your Bet: " + betv);
+				wallet.setText("Your Wallet: " + walletv);
+				repaint();
+				validate();
+			}
+			if (betv == 0) {
+			 	lessbet.setEnabled(false);
+			 } 
+
 		}
 		if ("Double Down".equals(ae.getActionCommand())) {
 			this.human.hit(this.dealer);
