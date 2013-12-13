@@ -135,6 +135,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			stay.setEnabled(true);
 			dbl.setEnabled(true);
 			start.setEnabled(false);
+			lessbet.setEnabled(false);
 			if (betv == 0) {
 				dbl.setEnabled(false);
 			}
@@ -158,13 +159,19 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			
 		}
 		if ("Bet 10$".equals(ae.getActionCommand())){
-			betv += 10;
-			walletv -= 10;
-			bet.setText("Your Bet: " + betv);
-			wallet.setText("Your Wallet: " + walletv);
-			lessbet.setEnabled(true);
-			repaint();
-			validate();
+			if (walletv > 0) {
+				betv += 10;
+				walletv -= 10;
+				bet.setText("Your Bet: " + betv);
+				wallet.setText("Your Wallet: " + walletv);
+				lessbet.setEnabled(true);
+				repaint();
+				validate();	
+			}
+			if (walletv == 0) {
+				betb.setEnabled(false);
+			}
+			
 		}
 		if ("Bet -10$".equals(ae.getActionCommand())) {
 			if (betv > 0) {
@@ -177,6 +184,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			}
 			if (betv == 0) {
 			 	lessbet.setEnabled(false);
+			}
+			if (walletv > 0) {
+			 	betb.setEnabled(true);
 			 } 
 
 		}
