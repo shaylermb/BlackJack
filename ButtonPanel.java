@@ -72,7 +72,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		wallet.setFont(new Font("sansserif", Font.BOLD, 16));
 		this.add(wallet);
 
-		betb.setEnabled(false);
+		betb.setEnabled(true);
 		hit.setEnabled(false);
 		stay.setEnabled(false);
 		dbl.setEnabled(false);
@@ -122,15 +122,27 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			
 		}
 		if("Start".equals(ae.getActionCommand())){
-			
+			this.x = 1;
+			betb.setEnabled(false);
+			hit.setEnabled(true);
+			stay.setEnabled(true);
+			dbl.setEnabled(true);
+			start.setEnabled(false);
+			if (betv == 0) {
+				dbl.setEnabled(false);
+			}
+			repaint();
+			table.repaint();
+			validate();
 		}
 		if ("New Game".equals(ae.getActionCommand())) {
 			newHand();
 			label.setText("");
 			betb.setEnabled(true);
-			hit.setEnabled(true);
-			stay.setEnabled(true);
-			dbl.setEnabled(true);
+			hit.setEnabled(false);
+			stay.setEnabled(false);
+			dbl.setEnabled(false);
+			start.setEnabled(true);
 			repaint();
 			table.repaint();
 			validate();
