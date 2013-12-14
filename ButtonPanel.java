@@ -154,7 +154,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			walletv -= 10;
 			bet.setText("Your Bet: " + betv);
 			wallet.setText("Your Wallet: " + walletv);
-			table.repaint();
 			repaint();
 			validate();
 		}
